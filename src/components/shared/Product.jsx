@@ -1,9 +1,19 @@
 /* eslint-disable react/prop-types */
 import { shorten } from "../../helper/function";
-//import { isInCard, quantityCounter } from "../../helper/function";
+import { useSelector, useDispatch } from "react-redux";
+import { isInCard, quantityCounter } from "../../helper/function";
 import { Link } from "react-router-dom";
+import {
+  addItem,
+  removeItem,
+  increase,
+  decrease,
+} from "../../redux/cart/cartAction";
 
 function Product({ productData }) {
+  const state = useSelector((state) => state.cartState);
+  const dispatch = useDispatch();
+
   return (
     <div className="flex flex-col items-start h-96 w-full gap-2 bg-[#F8FFDB]   border-[#f2f2f2] hover:z-10  overflow-hidden hover:shadow-[0px_1px_11px_5px_#EEEEEE]">
       <div className="h-full w-full overflow-hidden  flex justify-around bg-white p-6">
@@ -23,9 +33,9 @@ function Product({ productData }) {
             Details
           </Link>
           <div className="flex gap-1">
-            {/* {quantityCounter(state, product.id) > 1 && (
+            {quantityCounter(state, productData.id) > 1 && (
               <button
-                onClick={() => dispatch({ type: "DECREASE", payload: product })}
+                onClick={() => dispatch(decrease(productData))}
                 className="outline-none text-md font-extrabold bg-[#FF7D7D] hover:bg-[#f75d5d] py-2 px-2 text-white rounded-xl shadow"
               >
                 <svg
@@ -40,9 +50,7 @@ function Product({ productData }) {
             )}
             {quantityCounter(state, productData.id) === 1 && (
               <button
-                onClick={() =>
-                  dispatch({ type: "REMOVE_ITEM", payload: productData })
-                }
+                onClick={() => dispatch(removeItem(productData))}
                 className="outline-none text-md font-extrabold bg-[#FF7D7D] hover:bg-[#f75d5d] py-1 px-2 text-white rounded-xl shadow"
               >
                 <svg
@@ -69,7 +77,7 @@ function Product({ productData }) {
               <button
                 onClick={() => {
                   console.log("clicked inc");
-                  dispatch({ type: "INCREASE", payload: productData });
+                  dispatch(increase(productData));
                 }}
                 className="outline-none text-md font-extrabold bg-[#FF7D7D] hover:bg-[#f75d5d] py-2 px-2 text-white rounded-xl shadow"
               >
@@ -87,14 +95,12 @@ function Product({ productData }) {
               </button>
             ) : (
               <button
-                onClick={() =>
-                  dispatch({ type: "ADD_ITEM", payload: productData })
-                }
+                onClick={() => dispatch(addItem(productData))}
                 className="outline-none bg-[#FF7D7D] hover:bg-[#f75d5d] py-1 px-2 text-white rounded-xl shadow"
               >
                 add to card
               </button>
-            )} */}
+            )}
           </div>
         </div>
       </div>

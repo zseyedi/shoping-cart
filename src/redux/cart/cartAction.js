@@ -1,4 +1,4 @@
-const addItem = (products) => ({
+const addItem = (product) => ({
   type: "ADD_ITEM",
   payload: product,
 });
@@ -22,8 +22,6 @@ const clear = () => ({
   type: "CLEAR",
 });
 
-const checkout = () => {
-  return { type: "CHECKOUT" };
-};
+const checkout = () => ({ type: "CHECKOUT" });
 
 export { addItem, removeItem, increase, decrease, clear, checkout };

@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { CardContext } from "../../context/CardContextsProvider";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  const { state } = useContext(CardContext);
+  const state = useSelector((state) => state.cartState);
 
   return (
     <div className="flex py-4 px-10 justify-between items-center shadow-md">
